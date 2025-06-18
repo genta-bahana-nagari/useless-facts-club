@@ -4,6 +4,8 @@ import { trpc } from "@/utils/trpc";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
+import Link from "next/link";
+
 export default function HomePage() {
   const { data: facts, refetch, isLoading } = trpc.fact.getTwoRandomFacts.useQuery();
   const vote = trpc.fact.vote.useMutation();
@@ -28,7 +30,7 @@ export default function HomePage() {
       <div className="bg-zinc-900 border border-cyan-500/10 p-6 rounded-lg text-center">
         <p className="text-gray-300 text-lg mb-4">Got a fact that no one needs to know?</p>
         <Button className="bg-cyan-500 text-black hover:bg-cyan-400 px-6 py-2 rounded-lg font-semibold">
-          <a href="/submit">Submit Yours</a>
+          <Link href="/submit">Submit Yours</Link>
         </Button>
       </div>
 
