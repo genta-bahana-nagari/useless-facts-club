@@ -1,4 +1,3 @@
-// src/pages/leaderboard.tsx
 import { trpc } from '@/utils/trpc';
 
 export default function Leaderboard() {
