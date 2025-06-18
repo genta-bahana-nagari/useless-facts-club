@@ -1,28 +1,43 @@
-import { trpc } from '@/utils/trpc';
+import { trpc } from "@/utils/trpc";
+import { useState } from "react";
 
 export default function Home() {
-  const { data: fact, isLoading } = trpc.getRandomFact.useQuery();
-  const { data: leaderboard } = trpc.getLeaderboard.useQuery();
+  const { data: facts, refetch } = trpc.fact.getTwoRandomFacts.useQuery();
+  const vote = trpc.fact.vote.useMutation();
+  const { data: leaderboard } = trpc.fact.getTopFacts.useQuery();
+
+  const handleVote = async (id: string, stars: number) => {
+    await vote.mutateAsync({ id, stars });
+    refetch();
+  };
 
   return (
-    <main className="p-6">
-      <h1 className="text-3xl font-bold mb-4">Useless Facts Fight Club</h1>
+    <div className="p-4">
+      <h1 className="text-3xl font-bold">Useless Facts Fight Club</h1>
 
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold">Random Fact</h2>
-        {isLoading ? 'Loading...' : <p>{fact?.text}</p>}
-      </div>
+      {facts?.map((fact) => (
+        <div key={fact.id} className="p-4 border my-2 rounded">
+          <p>{fact.text}</p>
+          <div className="flex gap-2 mt-2">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                key={star}
+                className="bg-yellow-300 px-2 py-1 rounded"
+                onClick={() => handleVote(fact.id, star)}
+              >
+                ⭐ {star}
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
 
-      <div>
-        <h2 className="text-xl font-semibold">Leaderboard</h2>
-        <ul>
-          {leaderboard?.map((user, i) => (
-            <li key={user.id}>
-              {i + 1}. {user.username} - {user.wins} wins
-            </li>
-          ))}
-        </ul>
-      </div>
-    </main>
+      <h2 className="text-xl mt-8 font-semibold">Top Facts</h2>
+      {leaderboard?.map((fact) => (
+        <div key={fact.id} className="p-2 border-b">
+          ⭐ {fact.stars} - {fact.text}
+        </div>
+      ))}
+    </div>
   );
 }
