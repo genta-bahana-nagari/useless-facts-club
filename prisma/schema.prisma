@@ -16,8 +16,8 @@ model User {
 }
 
 model Fact {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   text      String
-  source    String?
+  stars     Int      @default(0)
   createdAt DateTime @default(now())
 }
