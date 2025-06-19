@@ -30,6 +30,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
               </Link>
               <ul className="flex gap-6 text-sm text-gray-300">
                 <li><Link href="/" className="hover:text-white">Home</Link></li>
+                <li><Link href="/all" className="hover:text-white">All Facts</Link></li>
                 <li><Link href="/leaderboard" className="hover:text-white">Leaderboard</Link></li>
                 <li><Link href="/submit" className="hover:text-white">Submit</Link></li>
                 <li><Link href="/about" className="hover:text-white">About</Link></li>
