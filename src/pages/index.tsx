@@ -58,7 +58,7 @@ export default function HomePage() {
             >
               Every day, two useless facts enter. Only one leaves... rated by
               your stars. Upvote the quirkiest, funniest, or most absurdly
-              unnecessary knowledge you've never needed.
+              unnecessary knowledge you&#39;ve never needed.
             </motion.p>
           </section>
 
@@ -122,9 +122,9 @@ export default function HomePage() {
               🧠 Why Useless Facts Matter
             </h3>
             <p className="text-gray-400 text-sm">
-              They don't. But that's the beauty of it. In a world full of
+              They don&#39;t. But that&#39;s the beauty of it. In a world full of
               stress, productivity, and hustle — sometimes all you need is to
-              know that octopuses have three hearts and blue blood. You're
+              know that octopuses have three hearts and blue blood. You&#39;re
               welcome.
             </p>
           </section>
@@ -186,7 +186,7 @@ export default function HomePage() {
                 },
                 {
                   q: "Can I submit a fact about my pet rock?",
-                  a: "If it's useless and weird, we want it. Pet rocks included.",
+                  a: "If it&#39;s useless and weird, we want it. Pet rocks included.",
                 },
                 {
                   q: "How are the top facts decided?",
@@ -202,7 +202,7 @@ export default function HomePage() {
                 },
                 {
                   q: "Can I use these facts at a party?",
-                  a: "Absolutely. We recommend it. Just don't blame us for the reactions.",
+                  a: "Absolutely. We recommend it. Just don&#39;t blame us for the reactions.",
                 },
               ].map((faq, i) => (
                 <div
