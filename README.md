@@ -25,6 +25,14 @@
 
 ---
 
+## 🌐 Deployment
+This project is optimized for Vercel:
+- Push to GitHub
+- Import into Vercel
+- Add your environment variable DATABASE_URL
+- Deploy and enjoy!
+---
+
 ## ⚙️ Installation
 
 1. **Clone the repository:**
@@ -39,38 +47,31 @@
    npm install
    ```
 
-3. **CopSet up your environment variables:**
+3. **Set up your environment variables:**
    Create a .env file by copying the example:
    ```bash
    cp .env.example .env
    ```
-
-4. **Install and configure Filament Shield and create a super admin user:**
+   Update the following in .env:
    ```bash
-   php artisan make:filament-user
-   php artisan shield:generate
-   php artisan shield:super-admin --panel
+   DATABASE_URL="your_neon_database_url"
+   ```
+
+4. **Push Prisma schema and generate Prisma Client:**
+   ```bash
+   npx prisma db push
+   cp .env.example .env
    ```
 
 5. **Run the local development server:**
    ```bash
-   php artisan serve
+   npm run dev
    ```
 
----
-
-## 🔐 Roles & Permissions
-
-Role management is powered by Filament Shield with the following roles:
-
-- **Super Admin** – Full access to all modules and acts as a seller  
-- **Customer** – Buyer role, frontend access only  
-
-Manage roles and permissions using:
-```bash
-php artisan shield:generate
-php artisan shield:super-admin
-```
+6. **Run the local Prisma Studio (optional):**
+   ```bash
+   npx prisma studio
+   ```
 
 ---
 
