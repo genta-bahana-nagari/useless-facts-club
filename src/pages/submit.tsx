@@ -8,8 +8,7 @@ export default function SubmitPage() {
   const submitFact = trpc.fact.submitFact.useMutation();
 
   const handleSubmit = async () => {
-    if (text.length < 5 || username.length < 3 || submitFact.isLoading) return;
-
+    if (text.length < 5 || username.length < 3 || submitFact.isPending) return;
     await submitFact.mutateAsync({ text, username });
     setText("");
     setUsername("");
