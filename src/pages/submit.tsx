@@ -15,8 +15,7 @@ export default function SubmitPage() {
     alert("Fact submitted!");
   };
 
-  const isSubmitting = submitFact.isLoading;
-
+ if (text.length < 5 || username.length < 3 || submitFact.isPending) return;
   return (
     <main className="bg-black min-h-screen text-white p-6 font-sans flex flex-col items-center">
       <motion.h1
