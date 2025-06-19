@@ -38,8 +38,8 @@ export default function Leaderboard() {
             >
               <div className="flex justify-between items-start">
                 <div className="space-y-1">
-                  <p className="text-sm text-gray-300">{fact.text}</p>
-                  <p className="text-xs text-gray-500">— {fact.user?.username ?? "Anonymous"}</p>
+                  <p className="text-sm font-semibold text-gray-400 mb-2">{fact.text}</p>
+                  <p className="text-sm text-gray-500">— {fact.user?.username ?? "Anonymous"}</p>
                 </div>
                 <span className="text-cyan-400 px-3 font-medium">{fact.stars} ⭐</span>
               </div>
