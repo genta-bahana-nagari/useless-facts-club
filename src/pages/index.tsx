@@ -10,8 +10,13 @@ export default function HomePage() {
   const vote = trpc.fact.vote.useMutation();
 
   const handleVote = async (id: string, stars: number) => {
-    await vote.mutateAsync({ id, stars });
-    refetch();
+    try {
+      await vote.mutateAsync({ id, stars });
+      refetch();
+    } catch (error) {
+      console.error("Voting failed:", error);
+      alert("Something went wrong while voting. Please try again.");
+    }
   };
 
   return (
@@ -37,8 +42,10 @@ export default function HomePage() {
       <div className="grid md:grid-cols-2 gap-6">
         {isLoading ? (
           <p className="col-span-2 text-center text-gray-500">Loading...</p>
+        ) : !facts || facts.length === 0 ? (
+          <p className="col-span-2 text-center text-gray-500">No facts available.</p>
         ) : (
-          facts?.map((fact) => (
+          facts.map((fact) => (
             <motion.div
               key={fact.id}
               className="bg-zinc-800 p-6 rounded-lg border border-cyan-500/10"
@@ -54,6 +61,7 @@ export default function HomePage() {
                 {[1, 2, 3, 4, 5].map((s) => (
                   <Button
                     key={s}
+                    aria-label={`Vote ${s} stars`}
                     className="cursor-pointer text-yellow-400 border border-yellow-600 hover:bg-yellow-600/20 text-sm"
                     variant="outline"
                     onClick={() => handleVote(fact.id, s)}

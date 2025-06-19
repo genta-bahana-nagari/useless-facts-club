@@ -30,12 +30,12 @@ export const factRouter = router({
   // 🆕 Get Two Random Facts
   getTwoRandomFacts: publicProcedure.query(async () => {
     const facts = await prisma.fact.findMany({
+      orderBy: { createdAt: 'desc' }, // or use raw SQL with RANDOM()
+      take: 20, // larger pool for randomness
       include: { user: true },
     });
 
     if (facts.length < 2) return facts;
-
-    // Randomly pick 2 different facts
     const shuffled = facts.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, 2);
   }),
