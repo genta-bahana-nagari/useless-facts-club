@@ -186,7 +186,7 @@ export default function HomePage() {
                 },
                 {
                   q: "Can I submit a fact about my pet rock?",
-                  a: "If it&#39;s useless and weird, we want it. Pet rocks included.",
+                  a: "If it's useless and weird, we want it. Pet rocks included.",
                 },
                 {
                   q: "How are the top facts decided?",
@@ -202,7 +202,7 @@ export default function HomePage() {
                 },
                 {
                   q: "Can I use these facts at a party?",
-                  a: "Absolutely. We recommend it. Just don&#39;t blame us for the reactions.",
+                  a: "Absolutely. We recommend it. Just don't blame us for the reactions.",
                 },
               ].map((faq, i) => (
                 <div
