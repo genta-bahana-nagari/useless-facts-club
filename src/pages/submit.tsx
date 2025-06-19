@@ -5,17 +5,20 @@ import { motion } from "framer-motion";
 export default function SubmitPage() {
   const [text, setText] = useState("");
   const [username, setUsername] = useState("");
+
   const submitFact = trpc.fact.submitFact.useMutation();
 
+  const isFormValid = text.length >= 5 && username.length >= 3;
+  const isSubmitting = submitFact.isPending;
+
   const handleSubmit = async () => {
-    if (text.length < 5 || username.length < 3 || submitFact.isPending) return;
+    if (!isFormValid || isSubmitting) return;
     await submitFact.mutateAsync({ text, username });
     setText("");
     setUsername("");
     alert("Fact submitted!");
   };
 
- if (text.length < 5 || username.length < 3 || submitFact.isPending) return;
   return (
     <main className="bg-black min-h-screen text-white p-6 font-sans flex flex-col items-center">
       <motion.h1
@@ -51,11 +54,11 @@ export default function SubmitPage() {
 
         <motion.button
           className={`w-full bg-cyan-500 hover:bg-cyan-400 text-black font-semibold py-2 px-4 rounded-lg transition-colors ${
-            isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+            isSubmitting || !isFormValid ? "opacity-50 cursor-not-allowed" : ""
           }`}
           whileTap={{ scale: 0.98 }}
           onClick={handleSubmit}
-          disabled={isSubmitting}
+          disabled={isSubmitting || !isFormValid}
         >
           {isSubmitting ? "Submitting..." : "🚀 Submit"}
         </motion.button>
