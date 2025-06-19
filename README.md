@@ -17,7 +17,8 @@
 
 ## 🛠️ Technologies Used
 
-- [Next.js](https://nextjs.org/) 14 – React framework for fast, modern web apps  
+- [Next.js](https://nextjs.org/) 15 – React framework for fast, modern web apps  
+- [Shadcn/UI](https://ui.shadcn.com/) – a set of reusable, customizable React components for building modern web interfaces
 - [Prisma](https://www.prisma.io/) – Type-safe ORM for database management  
 - [Neon](https://neon.tech/) – Serverless PostgreSQL hosting  
 - [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework  
