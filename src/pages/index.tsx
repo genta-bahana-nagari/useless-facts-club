@@ -136,16 +136,16 @@ export default function HomePage() {
             </h3>
             <div className="flex flex-wrap justify-center gap-4 mt-4 text-sm text-gray-300">
               <span className="bg-zinc-800 px-4 py-2 rounded-full border border-yellow-600/20">
-                I'll never get these brain cells back.
+                I&#39;ll never get these brain cells back.
               </span>
               <span className="bg-zinc-800 px-4 py-2 rounded-full border border-yellow-600/20">
-                This is the trivia hill I'll die on.
+                This is the trivia hill I&#39;ll die on.
               </span>
               <span className="bg-zinc-800 px-4 py-2 rounded-full border border-yellow-600/20">
-                I'm texting this to my group chat right now.
+                I&#39;m texting this to my group chat right now.
               </span>
               <span className="bg-zinc-800 px-4 py-2 rounded-full border border-yellow-600/20">
-                I'll use this at a party and regret nothing.
+                I&#39;ll use this at a party and regret nothing.
               </span>
               <span className="bg-zinc-800 px-4 py-2 rounded-full border border-yellow-600/20">
                 Sudden urge to share with unsuspecting coworkers.
@@ -160,7 +160,8 @@ export default function HomePage() {
                 Developing a passion for pointless trivia.
               </span>
               <span className="bg-zinc-800 px-4 py-2 rounded-full border border-yellow-600/20">
-                Risk of becoming the 'fun fact' person in your friend group.
+                Risk of becoming the &#39;fun fact&#39; person in your friend
+                group.
               </span>
             </div>
           </section>
