@@ -1,37 +1,73 @@
 import { z } from "zod";
+import { router, publicProcedure } from "../trpc";
 import { prisma } from "@/server/db";
-import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 
-export const factRouter = createTRPCRouter({
+export const factRouter = router({
+  submitFact: publicProcedure
+    .input(z.object({
+      text: z.string().min(5),
+      username: z.string().min(3),
+    }))
+    .mutation(async ({ input }) => {
+      const { text, username } = input;
+
+      const user = await prisma.user.upsert({
+        where: { username },
+        update: {},
+        create: { username },
+      });
+
+      const fact = await prisma.fact.create({
+        data: {
+          text,
+          user: { connect: { id: user.id } },
+        },
+      });
+
+      return fact;
+    }),
+
+  // 🆕 Get Two Random Facts
   getTwoRandomFacts: publicProcedure.query(async () => {
     const facts = await prisma.fact.findMany({
-      take: 2,
-      orderBy: { createdAt: "desc" },
+      include: { user: true },
     });
-    return facts;
+
+    if (facts.length < 2) return facts;
+
+    // Randomly pick 2 different facts
+    const shuffled = facts.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 2);
   }),
 
-  submitFact: publicProcedure
-    .input(z.object({ text: z.string().min(5) }))
-    .mutation(async ({ input }) => {
-      return prisma.fact.create({
-        data: { text: input.text },
-      });
-    }),
-
+  // 🆕 Vote on Fact
   vote: publicProcedure
-    .input(z.object({ id: z.string(), stars: z.number().min(1).max(5) }))
+    .input(z.object({
+      id: z.string(),
+      stars: z.number().min(1).max(5),
+    }))
     .mutation(async ({ input }) => {
-      return prisma.fact.update({
-        where: { id: input.id },
-        data: { stars: { increment: input.stars } },
+      const { id, stars } = input;
+
+      return await prisma.fact.update({
+        where: { id },
+        data: {
+          stars: {
+            increment: stars,
+          },
+        },
       });
     }),
 
-  getTopFacts: publicProcedure.query(() =>
-    prisma.fact.findMany({
-      orderBy: { stars: "desc" },
-      take: 10,
-    })
-  ),
+    getTopFacts: publicProcedure.query(async () => {
+      return await prisma.fact.findMany({
+        orderBy: {
+          stars: 'desc',
+        },
+        take: 20,
+        include: {
+          user: true,
+        },
+      });
+    }),
 });

@@ -7,17 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Fact {
+  id        String   @id @default(cuid())
+  text      String
+  stars     Int      @default(0)
+  createdAt DateTime @default(now())
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+}
+
 model User {
   id        String   @id @default(uuid())
   username  String   @unique
   wins      Int      @default(0)
   losses    Int      @default(0)
   createdAt DateTime @default(now())
-}
-
-model Fact {
-  id        String   @id @default(cuid())
-  text      String
-  stars     Int      @default(0)
-  createdAt DateTime @default(now())
+  
+  facts     Fact[]
 }
