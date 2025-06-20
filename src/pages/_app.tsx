@@ -17,6 +17,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       ],
     })
   );
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
@@ -28,14 +29,80 @@ const MyApp: AppType = ({ Component, pageProps }) => {
               <Link href="/" className="text-xl font-bold text-cyan-400">
                 🥊 UFFC
               </Link>
-              <ul className="flex gap-6 text-sm text-gray-300">
-                <li><Link href="/" className="hover:text-white">Home</Link></li>
-                <li><Link href="/all" className="hover:text-white">All Facts</Link></li>
-                <li><Link href="/leaderboard" className="hover:text-white">Leaderboard</Link></li>
-                <li><Link href="/submit" className="hover:text-white">Submit</Link></li>
-                <li><Link href="/about" className="hover:text-white">About</Link></li>
+              {/* Hamburger menu button for mobile */}
+              <div className="md:hidden">
+                <button
+                  type="button"
+                  className="text-gray-300 hover:text-white focus:outline-none"
+                  aria-label="Open menu"
+                  onClick={() => setMenuOpen((open) => !open)}
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                </button>
+              </div>
+              {/* Desktop nav */}
+              <ul className="hidden md:flex gap-6 text-sm text-gray-300">
+                <li>
+                  <Link href="/" className="hover:text-white">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/all" className="hover:text-white">
+                    All Facts
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/leaderboard" className="hover:text-white">
+                    Leaderboard
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/submit" className="hover:text-white">
+                    Submit
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about" className="hover:text-white">
+                    About
+                  </Link>
+                </li>
               </ul>
             </nav>
+            {/* Mobile menu */}
+            {menuOpen && (
+              <div className="md:hidden px-4 pb-4">
+                <ul className="flex flex-col gap-2 text-sm text-gray-300 bg-zinc-900 rounded shadow">
+                  <li>
+                    <Link href="/" className="block py-2 px-2 hover:text-white" onClick={() => setMenuOpen(false)}>
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/all" className="block py-2 px-2 hover:text-white" onClick={() => setMenuOpen(false)}>
+                      All Facts
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/leaderboard" className="block py-2 px-2 hover:text-white" onClick={() => setMenuOpen(false)}>
+                      Leaderboard
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/submit" className="block py-2 px-2 hover:text-white" onClick={() => setMenuOpen(false)}>
+                      Submit
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/about" className="block py-2 px-2 hover:text-white" onClick={() => setMenuOpen(false)}>
+                      About
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            )}
           </header>
 
           {/* Main Content */}
@@ -45,7 +112,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
           {/* Footer */}
           <footer className="bg-zinc-900 border-t border-cyan-500/10 text-center text-sm py-4 text-gray-400">
-            © {new Date().getFullYear()} Useless Facts Fight Club. Built with 🧠 + ☕
+            © {new Date().getFullYear()} Useless Facts Club. Built with 🧠 + ☕
           </footer>
         </div>
       </QueryClientProvider>
