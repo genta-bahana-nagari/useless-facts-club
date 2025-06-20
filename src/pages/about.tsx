@@ -10,11 +10,14 @@ export default function AboutPage() {
     >
       <h1 className="text-3xl font-bold text-cyan-400">About</h1>
       <p>
-        Welcome to <span className="text-white font-semibold">Useless Facts Fight Club</span> — a
-        battleground for the most random, pointless, yet strangely delightful facts known to the internet.
+        Welcome to{" "}
+        <span className="text-white font-semibold">Useless Facts Club</span> — a
+        battleground for the most random, pointless, yet strangely delightful
+        facts known to the internet.
       </p>
       <p>
-        Submit your own ridiculous trivia, rate others, and climb the leaderboard of ultimate uselessness.
+        Submit your own ridiculous trivia, rate others, and climb the
+        leaderboard of ultimate uselessness.
       </p>
       <p className="text-sm text-gray-500">
         Built with ❤️ using Next.js, tRPC, and TailwindCSS.

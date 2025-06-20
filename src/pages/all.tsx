@@ -23,7 +23,7 @@ export default function AllPage() {
   return (
     <>
       <Head>
-        <title>Useless Facts Fight Club</title>
+        <title>Useless Facts Club</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
       <main>
