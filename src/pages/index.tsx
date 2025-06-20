@@ -1,5 +1,8 @@
 "use client";
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 import { trpc } from "@/utils/trpc";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -11,7 +14,7 @@ export default function HomePage() {
     data: facts,
     refetch,
     isLoading,
-  } = trpc.fact.getTwoRandomFacts.useQuery();
+  } = trpc.fact.getAllFacts.useQuery();
   const vote = trpc.fact.vote.useMutation();
 
   const handleVote = async (id: string, stars: number) => {
@@ -27,7 +30,7 @@ export default function HomePage() {
   return (
     <>
       <Head>
-        <title>Useless Facts Fight Club</title>
+        <title>Useless Facts Club</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
       <main>
@@ -48,7 +51,7 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
             >
-              🥊 Useless Facts Fight Club
+              🥊 Useless Facts Club
             </motion.h1>
             <motion.p
               className="text-gray-400 font-semibold max-w-2xl mx-auto"
@@ -56,9 +59,9 @@ export default function HomePage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              Every day, two useless facts enter. Only one leaves... rated by
-              your stars. Upvote the quirkiest, funniest, or most absurdly
-              unnecessary knowledge you&#39;ve never needed.
+              Every day, facts and trivia go head-to-head. Rated by your stars.
+              Upvote the quirkiest, funniest, or most absurdly unnecessary
+              knowledge you&#39;ve never needed.
             </motion.p>
           </section>
 
@@ -73,47 +76,69 @@ export default function HomePage() {
             </ul>
           </section>
 
-          {/* Facts Battle */}
-          <div className="grid md:grid-cols-2 gap-6">
+          {/* Facts Showcase */}
+          <Swiper
+            modules={[Autoplay]}
+            autoplay={{
+              disableOnInteraction: true,
+            }}
+            speed={1000}
+            loop={true}
+            slidesPerView={2}
+            spaceBetween={20}
+            grabCursor={true}
+            className="w-full"
+          >
             {isLoading ? (
-              <p className="col-span-2 text-center text-gray-500">Loading...</p>
+              <SwiperSlide>
+                <p className="text-center text-gray-500">Loading...</p>
+              </SwiperSlide>
             ) : !facts || facts.length === 0 ? (
-              <p className="col-span-2 text-center text-gray-500">
-                No facts available.
-              </p>
+              <SwiperSlide>
+                <p className="text-center text-gray-500">No facts available.</p>
+              </SwiperSlide>
             ) : (
               facts.map((fact) => (
-                <motion.div
-                  key={fact.id}
-                  className="bg-zinc-800 p-6 rounded-lg border border-cyan-500/10"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <h3 className="text-cyan-300 font-semibold mb-1">🤔 Fact</h3>
-                  <p className="text-sm font-semibold text-gray-400 mb-2">
-                    {fact.text}
-                  </p>
-                  <p className="text-sm text-gray-500 mb-4">
-                    — {fact.user?.username ?? "Anonymous"}
-                  </p>
+                <SwiperSlide key={fact.id}>
+                  <motion.div
+                    className="bg-zinc-800 p-6 rounded-lg border border-cyan-500/10 mx-auto max-w-xl"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <h3 className="text-cyan-300 font-semibold mb-1">🤔 Fact</h3>
+                    <p className="text-sm font-semibold text-gray-400 mb-2">{fact.text}</p>
+                    <p className="text-sm text-gray-500 mb-4">
+                      — {fact.user?.username ?? 'Anonymous'}
+                    </p>
 
-                  <div className="flex gap-2 flex-wrap">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <Button
-                        key={s}
-                        aria-label={`Vote ${s} stars`}
-                        className="cursor-pointer text-yellow-400 border border-yellow-600 hover:bg-yellow-600/20 text-sm"
-                        variant="outline"
-                        onClick={() => handleVote(fact.id, s)}
-                      >
-                        ⭐ {s}
-                      </Button>
-                    ))}
-                  </div>
-                </motion.div>
+                    <div className="mt-4 flex gap-2 flex-wrap">
+                      {[1, 2, 3, 4, 5].map((s) => (
+                        <Button
+                          key={s}
+                          aria-label={`Vote ${s} stars`}
+                          className="cursor-pointer text-yellow-400 border border-yellow-600 hover:bg-yellow-600/20 text-sm"
+                          variant="outline"
+                          onClick={() => handleVote(fact.id, s)}
+                        >
+                          ⭐ {s}
+                        </Button>
+                      ))}
+                    </div>
+                  </motion.div>
+                </SwiperSlide>
               ))
             )}
+          </Swiper>
+
+          {/* CTA */}
+          <div className="text-center">
+            <Button
+              asChild
+              className="bg-cyan-500 text-black hover:bg-cyan-400 hover:scale-115 px-6 py-2 rounded-lg font-semibold"
+            >
+              <Link href="/submit">View All</Link>
+            </Button>
           </div>
 
           {/* Why Useless Facts Matter */}
@@ -122,8 +147,8 @@ export default function HomePage() {
               🧠 Why Useless Facts Matter
             </h3>
             <p className="text-gray-400 text-sm">
-              They don&#39;t. But that&#39;s the beauty of it. In a world full of
-              stress, productivity, and hustle — sometimes all you need is to
+              They don&#39;t. But that&#39;s the beauty of it. In a world full
+              of stress, productivity, and hustle — sometimes all you need is to
               know that octopuses have three hearts and blue blood. You&#39;re
               welcome.
             </p>
@@ -240,7 +265,7 @@ export default function HomePage() {
             </p>
             <Button
               asChild
-              className="bg-cyan-500 text-black hover:bg-cyan-400 px-6 py-2 rounded-lg font-semibold"
+              className="bg-cyan-500 text-black hover:bg-cyan-400 hover:scale-115 px-6 py-2 rounded-lg font-semibold"
             >
               <Link href="/submit">Submit Yours</Link>
             </Button>
