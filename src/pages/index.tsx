@@ -83,20 +83,34 @@ export default function HomePage() {
               disableOnInteraction: true,
             }}
             speed={1000}
-            loop={true}
-            slidesPerView={2}
+            loop={!!facts && facts.length > 1} // Loop only if you have enough slides
+            slidesPerView={isLoading || !facts || facts.length === 0 ? 1 : 2} // 👈 This is key
             spaceBetween={20}
             grabCursor={true}
-            className="w-full"
+            className="w-full min-h-[200px]"
           >
             {isLoading ? (
-              <SwiperSlide>
-                <p className="text-center text-gray-500">Loading...</p>
-              </SwiperSlide>
+              <>
+                {[...Array(2)].map((_, index) => (
+                  <SwiperSlide key={index}>
+                    <div className="flex justify-center items-center h-full min-h-[200px]">
+                      <p className="text-gray-500 font-semibold text-lg text-center">Loading...</p>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </>
             ) : !facts || facts.length === 0 ? (
-              <SwiperSlide>
-                <p className="text-center text-gray-500">No facts available.</p>
-              </SwiperSlide>
+              <>
+                {[...Array(2)].map((_, index) => (
+                  <SwiperSlide key={index}>
+                    <div className="flex justify-center items-center h-full min-h-[200px]">
+                      <p className="text-gray-500 font-semibold text-lg text-center">
+                        No facts available.
+                      </p>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </>
             ) : (
               facts.map((fact) => (
                 <SwiperSlide key={fact.id}>
@@ -106,10 +120,14 @@ export default function HomePage() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <h3 className="text-cyan-300 font-semibold mb-1">🤔 Fact</h3>
-                    <p className="text-sm font-semibold text-gray-400 mb-2">{fact.text}</p>
+                    <h3 className="text-cyan-300 font-semibold mb-1">
+                      🤔 Fact
+                    </h3>
+                    <p className="text-sm font-semibold text-gray-400 mb-2">
+                      {fact.text}
+                    </p>
                     <p className="text-sm text-gray-500 mb-4">
-                      — {fact.user?.username ?? 'Anonymous'}
+                      — {fact.user?.username ?? "Anonymous"}
                     </p>
 
                     <div className="mt-4 flex gap-2 flex-wrap">

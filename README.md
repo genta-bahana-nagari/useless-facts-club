@@ -42,8 +42,8 @@ This project is optimized for Vercel:
 1. **Clone the repository:**
 
    ```bash
-   git clone -b main --single-branch https://github.com/genta-bahana-nagari/useless-facts-fight-club.git
-   cd useless-facts-fight-club
+   git clone -b main --single-branch https://github.com/genta-bahana-nagari/useless-facts-club.git
+   cd useless-facts-club
    ```
 
    > The `main` branch is stable and tested.
@@ -71,7 +71,6 @@ This project is optimized for Vercel:
 
    ```bash
    npx prisma db push
-   cp .env.example .env
    ```
 
 5. **Run the local development server:**
