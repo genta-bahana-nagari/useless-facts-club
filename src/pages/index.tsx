@@ -32,6 +32,7 @@ export default function HomePage() {
       <Head>
         <title>Useless Facts Club</title>
         <link rel="icon" href="/favicon.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main>
         <div className="max-w-5xl mx-auto px-4 py-10 space-y-12">
@@ -94,7 +95,9 @@ export default function HomePage() {
                 {[...Array(2)].map((_, index) => (
                   <SwiperSlide key={index}>
                     <div className="flex justify-center items-center h-full min-h-[200px]">
-                      <p className="text-gray-500 font-semibold text-lg text-center">Loading...</p>
+                      <p className="text-gray-500 font-semibold text-lg text-center">
+                        Loading...
+                      </p>
                     </div>
                   </SwiperSlide>
                 ))}
