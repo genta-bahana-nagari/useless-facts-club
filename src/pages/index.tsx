@@ -25,7 +25,6 @@ export default function HomePage() {
     }
   };
 
-  const hasFacts = facts && facts.length > 0;
   const shouldLoop = facts && facts.length > 1;
 
   return (
