@@ -76,27 +76,27 @@ const MyApp: AppType = ({ Component, pageProps }) => {
               <div className="md:hidden px-4 pb-4">
                 <ul className="flex flex-col gap-2 text-sm text-gray-300 bg-zinc-900 rounded shadow">
                   <li>
-                    <Link href="/" className="block py-2 px-2 hover:text-white" onClick={() => setMenuOpen(false)}>
+                    <Link href="/" className="block py-2 px-2 hover:text-white text-center" onClick={() => setMenuOpen(false)}>
                       Home
                     </Link>
                   </li>
                   <li>
-                    <Link href="/all" className="block py-2 px-2 hover:text-white" onClick={() => setMenuOpen(false)}>
+                    <Link href="/all" className="block py-2 px-2 hover:text-white text-center" onClick={() => setMenuOpen(false)}>
                       All Facts
                     </Link>
                   </li>
                   <li>
-                    <Link href="/leaderboard" className="block py-2 px-2 hover:text-white" onClick={() => setMenuOpen(false)}>
+                    <Link href="/leaderboard" className="block py-2 px-2 hover:text-white text-center" onClick={() => setMenuOpen(false)}>
                       Leaderboard
                     </Link>
                   </li>
                   <li>
-                    <Link href="/submit" className="block py-2 px-2 hover:text-white" onClick={() => setMenuOpen(false)}>
+                    <Link href="/submit" className="block py-2 px-2 hover:text-white text-center" onClick={() => setMenuOpen(false)}>
                       Submit
                     </Link>
                   </li>
                   <li>
-                    <Link href="/about" className="block py-2 px-2 hover:text-white" onClick={() => setMenuOpen(false)}>
+                    <Link href="/about" className="block py-2 px-2 hover:text-white text-center" onClick={() => setMenuOpen(false)}>
                       About
                     </Link>
                   </li>
