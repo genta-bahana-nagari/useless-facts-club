@@ -27,7 +27,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
           <header className="bg-zinc-900 border-b border-cyan-500/10">
             <nav className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
               <Link href="/" className="text-xl font-bold text-cyan-400">
-                🥊 UFFC
+                🥊 UFC
               </Link>
               {/* Hamburger menu button for mobile */}
               <div className="md:hidden">
