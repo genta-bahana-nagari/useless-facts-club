@@ -28,12 +28,21 @@
 
 ## 🌐 Deployment
 
-This project is optimized for Vercel:
+This project is optimized for any kind of deployment:
 
+### Vercel
 - Push to GitHub
 - Import into Vercel
 - Add your environment variable DATABASE_URL
 - Deploy and enjoy!
+
+### Docker (VPS Hosting recomended)
+- Push to GitHub
+- Import into your VPS hosting
+- Add your environment variable DATABASE_URL
+- Deploy with docker-compose command and enjoy!
+
+> Dockerfile and docker-compose.yml is provided for example 
 
 ---
 
@@ -42,7 +51,7 @@ This project is optimized for Vercel:
 1. **Clone the repository:**
 
    ```bash
-   git clone -b main --single-branch https://github.com/genta-bahana-nagari/useless-facts-club.git
+   git clone https://github.com/genta-bahana-nagari/useless-facts-club.git
    cd useless-facts-club
    ```
 
