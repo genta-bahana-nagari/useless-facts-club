@@ -1,12 +1,37 @@
 version: '3.8'
 
 services:
+  traefik:
+    image: traefik:v2.11
+    container_name: traefik
+    command:
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.myresolver.acme.email=your@email-example.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--api.dashboard=true"
+      - "--log.level=DEBUG"
+    ports:
+      - "443:443"       # HTTPS
+      - "80:80"
+      - "8080:8080"   # Traefik Dashboard (optional)
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./traefik:/letsencrypt"
+
   web:
     build: .
-    ports:
-      - '3000:3000'
     volumes:
       - .:/app
       - /app/node_modules
     environment:
       - NODE_ENV=development
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.web.rule=Host(`your-domain.com`)"
+      - "traefik.http.routers.web.entrypoints=websecure"
+      - "traefik.http.routers.web.tls.certresolver=myresolver"
+      - "traefik.http.services.web.loadbalancer.server.port=3000"
