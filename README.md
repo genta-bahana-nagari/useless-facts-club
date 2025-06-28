@@ -41,8 +41,20 @@ This project is optimized for any kind of deployment:
 - Import into your VPS hosting
 - Add your environment variable DATABASE_URL
 - Deploy with docker-compose command and enjoy!
+> Dockerfile and docker-compose.yml is provided for example
 
-> Dockerfile and docker-compose.yml is provided for example 
+### Docker Tips
+After you run the compose (specially detached mode), you should run these commands:
+```bash
+sudo docker exec -it web_container_name sh
+```
+> Check your container name in docker compose
+Inside container
+```bash
+npx prisma generate
+npx prisma migrate deploy
+```
+These will connect your web app to your database hosting (if you use online database hosting)
 
 ---
 
