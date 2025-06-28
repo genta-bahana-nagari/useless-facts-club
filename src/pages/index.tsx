@@ -156,7 +156,7 @@ export default function HomePage() {
               asChild
               className="bg-cyan-500 text-black hover:bg-cyan-400 px-4 sm:px-6 py-2 rounded-lg font-semibold"
             >
-              <Link href="/submit">View All</Link>
+              <Link href="/all">View All</Link>
             </Button>
           </div>
 
