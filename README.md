@@ -44,7 +44,7 @@ This project is optimized for any kind of deployment:
 > Dockerfile and docker-compose.yml is provided for example
 
 ### Docker Tips
-After you run the compose (specially detached mode), you should run these commands:
+After you run the compose (specially detached mode) and the database is not attached, I get you some tips:
 ```bash
 sudo docker exec -it web_container_name sh
 ```
