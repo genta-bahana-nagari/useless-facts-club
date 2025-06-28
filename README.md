@@ -48,7 +48,10 @@ After you run the compose (specially detached mode), you should run these comman
 ```bash
 sudo docker exec -it web_container_name sh
 ```
-> Check your container name in docker compose
+> Check your web container name in docker compose, or run this:
+```bash
+docker ps
+```
 Inside container
 ```bash
 npx prisma generate
