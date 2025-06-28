@@ -31,7 +31,7 @@ services:
       - .:/app
       - /app/node_modules
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=development # Change to production when deployment!
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.web.rule=Host(`your.domain-example.com`)"
