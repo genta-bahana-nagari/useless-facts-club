@@ -43,7 +43,9 @@ This project is optimized for any kind of deployment:
 - Deploy with docker-compose command and enjoy!
 > Dockerfile and docker-compose.yml is provided for example
 
-### Docker Tips
+### Docker on VPS Tips
+
+#### Database
 After you run the compose (specially detached mode) and the database is not attached, I get you some tips:
 ```bash
 sudo docker exec -it web_container_name sh
@@ -58,6 +60,32 @@ npx prisma generate
 npx prisma migrate deploy
 ```
 These will connect your web app to your database hosting (if you use online database hosting). This [link](https://facts-club.gentabahana.me/) is the example of docker deployment (still learning how to optimize it). Vercel deployment version can be visited [here](https://facts-fight.vercel.app/). Same thing.
+
+#### Run with Other Projects
+If you running along with other projects (using the same port), you can edit the traefic config in docker-compose.yml:
+```bash
+  traefik: #for proxy
+    image: traefik:v2.11
+    container_name: traefik
+    command:
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:8080"
+      - "--entrypoints.websecure.address=:8443"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.myresolver.acme.email=any@gmail.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--api.dashboard=true"
+      - "--log.level=DEBUG"
+    ports:
+      - "8080:8080"   # plain HTTP
+      - "8443:8443"   # TLS
+      - "8081:8080"   # Traefik dashboard
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./traefik:/letsencrypt"
+```
+Then you can use <strong>reverse proxy</strong> and <strong>cerbot SSL</strong> to make it secure and reliable ==> just like I did :)
 
 ---
 
