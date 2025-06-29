@@ -9,7 +9,6 @@ import { trpc } from "@/utils/trpc";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Head from "next/head";
 
 export default function HomePage() {
   const { data: facts, refetch, isLoading } = trpc.fact.getAllFacts.useQuery();
@@ -29,11 +28,6 @@ export default function HomePage() {
 
   return (
     <>
-      <Head>
-        <title>Useless Facts Club</title>
-        <link rel="icon" href="/favicon.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
       <main className="w-full max-w-screen min-h-screen">
         <div className="w-full max-w-5xl mx-auto px-2 sm:px-4 py-6 sm:py-10 space-y-8 sm:space-y-12">
           {/* Hero Section */}
