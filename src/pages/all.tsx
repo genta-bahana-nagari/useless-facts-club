@@ -3,7 +3,6 @@
 import { trpc } from "@/utils/trpc";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import Head from "next/head";
 
 export default function AllPage() {
   const { data: facts, refetch, isLoading } = trpc.all.getAllFacts.useQuery();
@@ -22,10 +21,6 @@ export default function AllPage() {
 
   return (
     <>
-      <Head>
-        <title>Useless Facts Club</title>
-        <link rel="icon" href="/favicon.png" />
-      </Head>
       <main>
         <div className="max-w-5xl mx-auto px-4 py-10 space-y-12">
           <motion.h1
