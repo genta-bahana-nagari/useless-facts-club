@@ -131,7 +131,6 @@ If you running this along with other projects (or services that using the same p
     ports:
       - "8080:8080"   # plain HTTP
       - "8443:8443"   # TLS
-      - "8081:8080"   # Traefik dashboard
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./traefik:/letsencrypt"
