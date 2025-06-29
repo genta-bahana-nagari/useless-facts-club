@@ -57,7 +57,7 @@ Inside container
 npx prisma generate
 npx prisma migrate deploy
 ```
-These will connect your web app to your database hosting (if you use online database hosting)
+These will connect your web app to your database hosting (if you use online database hosting). This [link](https://facts-club.gentabahana.me/) is the example of docker deployment (still learning how to optimize it). Vercel deployment version can be visited [here](https://facts-fight.vercel.app/). Same thing.
 
 ---
 
