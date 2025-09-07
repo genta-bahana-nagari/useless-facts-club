@@ -28,8 +28,8 @@ export default function HomePage() {
 
   return (
     <>
-      <main className="w-full max-w-screen min-h-screen">
-        <div className="w-full max-w-5xl mx-auto px-2 sm:px-4 py-6 sm:py-10 space-y-8 sm:space-y-12">
+      <main className="w-full max-w-full overflow-x-hidden">
+        <div className="w-full mx-auto px-2 sm:px-4 py-6 sm:py-10 space-y-8 sm:space-y-12">
           {/* Hero Section */}
           <section className="text-center space-y-3 sm:space-y-4">
             <motion.h2
@@ -49,7 +49,7 @@ export default function HomePage() {
               🥊 Useless Facts Club
             </motion.h1>
             <motion.p
-              className="text-gray-400 font-semibold max-w-xs sm:max-w-2xl mx-auto text-xs sm:text-base"
+              className="text-gray-400 font-semibold max-w-full sm:max-w-2xl mx-auto text-xs sm:text-base"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
@@ -61,7 +61,7 @@ export default function HomePage() {
           </section>
 
           {/* How It Works */}
-          <section className="bg-zinc-900 p-2 md:p-  border border-cyan-500/10 rounded-lg space-y-1 sm:space-y-2">
+          <section className="md:mx-16 p-6 bg-zinc-900 border border-cyan-500/10 rounded-lg space-y-1 sm:space-y-2">
             <h3 className="text-sm sm:text-lg text-cyan-400 font-bold">
               🤯 How It Works
             </h3>
@@ -81,27 +81,19 @@ export default function HomePage() {
             loop={shouldLoop}
             grabCursor={true}
             spaceBetween={8}
-            className="w-full min-h-[180px] sm:min-h-[200px]"
+            className="md:w-full !overflow-hidden gap-4"
             breakpoints={{
-              0: {
-                slidesPerView: 1,
-              },
-              480: {
-                slidesPerView: Math.min(facts?.length || 1, 1.2),
-              },
-              640: {
-                slidesPerView: Math.min(facts?.length || 1, 2),
-              },
-              1024: {
-                slidesPerView: Math.min(facts?.length || 1, 3),
-              },
+              0: { slidesPerView: 1 },
+              480: { slidesPerView: 1 },
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
             }}
           >
             {(isLoading || !facts?.length ? [...Array(2)] : facts).map(
               (fact, i) => (
                 <SwiperSlide key={fact?.id ?? i}>
                   <motion.div
-                    className="bg-zinc-800 p-4 sm:p-6 rounded-lg border border-cyan-500/10 mx-auto max-w-xs sm:max-w-xl min-h-[160px] sm:min-h-[200px] flex flex-col justify-between"
+                    className="w-full max-w-full sm:max-w-[80%] md:max-w-md mx-auto bg-zinc-800 p-4 sm:p-6 rounded-lg border border-cyan-500/10 flex flex-col justify-between"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3 }}
@@ -116,7 +108,7 @@ export default function HomePage() {
                           <h3 className="text-cyan-300 font-semibold mb-1">
                             🤔 Fact
                           </h3>
-                          <p className="text-xs sm:text-sm font-semibold text-gray-400 mb-2">
+                          <p className="text-xs sm:text-sm font-semibold text-gray-400 mb-2 break-words">
                             {fact.text}
                           </p>
                           <p className="text-xs sm:text-sm text-gray-500 mb-4">
@@ -155,7 +147,7 @@ export default function HomePage() {
           </div>
 
           {/* Why Useless Facts Matter */}
-          <section className="bg-zinc-900 p-3 sm:p-5 border border-rose-500/10 rounded-lg space-y-1 sm:space-y-2">
+          <section className="bg-zinc-900 md:mx-16 p-3 sm:p-5 border border-rose-500/10 rounded-lg space-y-1 sm:space-y-2">
             <h3 className="text-sm sm:text-lg text-rose-400 font-bold">
               🧠 Why Useless Facts Matter
             </h3>
@@ -185,7 +177,7 @@ export default function HomePage() {
               ].map((text, i) => (
                 <span
                   key={i}
-                  className="bg-zinc-800 px-3 sm:px-4 py-1 sm:py-2 rounded-full border border-yellow-600/20"
+                  className="bg-zinc-800 px-3 sm:px-4 py-1 sm:py-2 rounded-full border border-yellow-600/20 break-words max-w-[90%]"
                 >
                   {text}
                 </span>
@@ -205,7 +197,7 @@ export default function HomePage() {
               🤔 FAQ (Frequently Absurd Questions)
             </motion.h3>
 
-            <div className="flex flex-col items-center space-y-3 sm:space-y-4">
+            <div className="flex flex-col items-center space-y-6 sm:space-y-8 w-full md:px-16">
               {[
                 {
                   q: "Will these facts improve my life?",
@@ -232,12 +224,13 @@ export default function HomePage() {
                   a: "Absolutely. But reactions may vary.",
                 },
               ].map((faq, i) => (
-                <div
-                  key={faq.q}
-                  className="w-full flex flex-col items-center space-y-1 sm:space-y-2"
-                >
+                <div key={faq.q} className="w-full flex flex-col space-y-2">
+                  {/* Question bubble */}
                   <motion.div
-                    className="self-end max-w-xs sm:max-w-md bg-cyan-900/80 text-cyan-100 rounded-2xl px-3 sm:px-5 py-2 sm:py-3 shadow-md border border-cyan-400/20"
+                    className="self-end w-auto md:max-w-[85%] max-w-[70%] break-words 
+                   bg-gradient-to-r from-cyan-700 to-cyan-500 text-white 
+                   rounded-2xl px-3 sm:px-4 md:px-5 py-2 sm:py-3 
+                   shadow-lg text-sm sm:text-base md:text-lg"
                     initial={{ opacity: 0, x: 40 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -245,14 +238,19 @@ export default function HomePage() {
                   >
                     <span className="font-semibold">Q:</span> {faq.q}
                   </motion.div>
+
+                  {/* Answer bubble */}
                   <motion.div
-                    className="self-start max-w-xs sm:max-w-md bg-zinc-800 text-gray-200 rounded-2xl px-3 sm:px-5 py-2 sm:py-3 shadow-md border border-gray-600/20"
+                    className="self-start w-auto md:max-w-[85%] max-w-[70%] break-words 
+                   bg-zinc-800 text-gray-200 rounded-2xl px-3 sm:px-4 md:px-5 
+                   py-2 sm:py-3 shadow-lg border border-zinc-700/40 
+                   text-sm sm:text-base md:text-lg"
                     initial={{ opacity: 0, x: -40 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.1 * i + 0.1 }}
                   >
-                    <span className="font-semibold text-cyan-300">A:</span>{" "}
+                    <span className="text-cyan-300 font-semibold">A:</span>{" "}
                     {faq.a}
                   </motion.div>
                 </div>

@@ -43,9 +43,9 @@ export default function AllPage() {
             }`}
           >
             {isLoading ? (
-              <p className="col-span-2 text-center text-gray-500">Loading...</p>
+              <p className="text-center text-gray-500">Loading...</p>
             ) : !facts || facts.length === 0 ? (
-              <p className="col-span-2 text-center text-gray-500">
+              <p className="text-center text-gray-500">
                 No facts available.
               </p>
             ) : (
