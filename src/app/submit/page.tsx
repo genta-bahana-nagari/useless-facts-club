@@ -9,7 +9,7 @@ export default function Submit() {
 
   const submitFact = trpc.fact.submitFact.useMutation();
 
-  const isFormValid = text.length >= 5 && username.length >= 10;
+  const isFormValid = text.length >= 10 && username.length >= 5;
   const isSubmitting = submitFact.isPending;
 
   const handleSubmit = async () => {
@@ -40,7 +40,7 @@ export default function Submit() {
         <input
           className="w-full p-3 bg-zinc-900 text-white border border-cyan-600/20 rounded-lg placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition"
           type="text"
-          placeholder="Your name (min. 5 characters)"
+          placeholder="Your name"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -48,7 +48,7 @@ export default function Submit() {
         <textarea
           className="w-full p-4 bg-zinc-900 text-white border border-cyan-600/20 rounded-lg placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition"
           rows={5}
-          placeholder="Type your useless fact here (min. 10 characters)"
+          placeholder="Type your useless fact here..."
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
