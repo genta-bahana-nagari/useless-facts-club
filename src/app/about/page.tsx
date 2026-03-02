@@ -1,6 +1,7 @@
+"use client";
 import { motion } from "framer-motion";
 
-export default function AboutPage() {
+export default function About() {
   return (
     <motion.div
       className="max-w-3xl mx-auto px-4 py-12 text-gray-300 space-y-6"
