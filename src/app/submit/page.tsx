@@ -1,8 +1,9 @@
+"use client";
 import { trpc } from "@/utils/trpc";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function SubmitPage() {
+export default function Submit() {
   const [text, setText] = useState("");
   const [username, setUsername] = useState("");
 

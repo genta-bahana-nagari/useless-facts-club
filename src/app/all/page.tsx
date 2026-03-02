@@ -4,7 +4,7 @@ import { trpc } from "@/utils/trpc";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
-export default function AllPage() {
+export default function All() {
   const { data: facts, refetch, isLoading } = trpc.all.getAllFacts.useQuery();
 
   const vote = trpc.fact.vote.useMutation();
