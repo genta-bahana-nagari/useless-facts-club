@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 export default function All() {
-  const { data: facts, refetch, isLoading } = trpc.all.getAllFacts.useQuery();
+  const { data: facts, refetch, isLoading } = trpc.fact.getAllFacts.useQuery();
 
   const vote = trpc.fact.vote.useMutation();
 
@@ -43,11 +43,15 @@ export default function All() {
             }`}
           >
             {isLoading ? (
-              <p className="text-center text-gray-500">Loading...</p>
+              <div className="col-span-full flex justify-center items-center py-10">
+                <p className="text-gray-500 text-lg">Loading...</p>
+              </div>
             ) : !facts || facts.length === 0 ? (
-              <p className="text-center text-gray-500">
-                No facts available.
-              </p>
+              <div className="col-span-full flex justify-center items-center py-10">
+                <p className="text-gray-500 text-lg">
+                  No facts available yet. Be the first to submit one!
+                </p>
+              </div>
             ) : (
               facts.map((fact) => (
                 <motion.div
