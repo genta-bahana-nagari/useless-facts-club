@@ -141,13 +141,12 @@ To run this project locally, follow these steps:
 
    ```sh
    npm install
-  ```
+   ```
 
 4. **Push Prisma schema and generate Prisma Client:**
    ```sh
    npx prisma db push
    ```
-
 
 5. **Run the development server:**
 
