@@ -1,110 +1,168 @@
-# 🥊 Useless Facts Club
+# Useless Facts Club
+
+## 🚀 About the Project
 
 **Useless Facts Club** is a fun and chaotic web app where weird, random trivia competes for the spotlight. Submit your own absurd facts, vote on others, and see which useless knowledge rises to the top. It's quirky, competitive, and totally unnecessary — in the best way.
 
 ---
 
-## 🔧 Key Features
+## 🛠️ Tech Stack
 
-- 🧠 **Submit bizarre or completely useless facts**
-- 🔼 **Vote on your favorite facts to boost them on the leaderboard**
-- 🥊 **Real-time fact battles with ranking system**
-- 🎲 **Randomized discovery of new and obscure facts**
-- 💬 **Community-driven content and engagement**
-- 📱 **Fully responsive and mobile-friendly design**
+- **Frontend:** NextJS 15 (upgraded to 16), Tailwind, Shadcn/UI
+- **Database:** Prisma, Neon PostgreSQL
+- **Deployment:** Vercel or Docker
 
 ---
 
-## 🛠️ Technologies Used
+## ✨ Features
 
-- [Next.js](https://nextjs.org/) 15 – React framework for fast, modern web apps
-- [Shadcn/UI](https://ui.shadcn.com/) – a set of reusable, customizable React components for building modern web interfaces
-- [Prisma](https://www.prisma.io/) – Type-safe ORM for database management
-- [Neon](https://neon.tech/) – Serverless PostgreSQL hosting
-- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework
-- [Vercel](https://vercel.com/) – Hosting & serverless functions
+- Submit bizarre or completely useless facts
+- Vote on your favorite facts to boost them on the leaderboard
+- Real-time fact battles with ranking system
+- Randomized discovery of new and obscure facts
+- Community-driven content and engagement
+- Fully responsive and mobile-friendly design
 
 ---
 
-## ⚙️ Installation
+## 📁 Project Structure
+
+```sh
+ useless-facts-club/
+ ├── prisma
+ │   ├── migrations
+ │   │   ├── 20250618173905_testing
+ │   │   │   └── migration.sql
+ │   │   ├── 20250619012716_add_fact_user_relation
+ │   │   │   └── migration.sql
+ │   │   └── migration_lock.toml
+ │   └── schema.prisma
+ ├── public
+ │   └── favicon.png
+ ├── src
+ │   ├── app
+ │   │   ├── about
+ │   │   │   └── page.tsx
+ │   │   ├── all
+ │   │   │   └── page.tsx
+ │   │   ├── api
+ │   │   │   └── trpc
+ │   │   │       └── [trpc]
+ │   │   │           └── route.ts
+ │   │   ├── leaderboard
+ │   │   │   └── page.tsx
+ │   │   ├── submit
+ │   │   │   └── page.tsx
+ │   │   ├── globals.css
+ │   │   ├── layout.tsx
+ │   │   ├── not-found.tsx
+ │   │   ├── page.tsx
+ │   │   └── providers.tsx
+ │   ├── components
+ │   │   ├── layout
+ │   │   │   ├── footer.tsx
+ │   │   │   └── navbar.tsx
+ │   │   └── ui
+ │   │       ├── button.tsx
+ │   │       ├── card.tsx
+ │   │       └── skeleton.tsx
+ │   ├── lib
+ │   │   └── utils.ts
+ │   ├── server
+ │   │   ├── api
+ │   │   │   ├── context.ts
+ │   │   │   ├── root.ts
+ │   │   │   └── trpc.ts
+ │   │   ├── routers
+ │   │   │   ├── fact.ts
+ │   │   │   └── index.ts
+ │   │   ├── db.ts
+ │   │   └── trpc.ts
+ │   └── utils
+ │       └── trpc.ts
+ ├── .dockerignore
+ ├── .env
+ ├── .env.example
+ ├── .gitignore
+ ├── components.json
+ ├── docker-compose.yml
+ ├── Dockerfile
+ ├── eslint.config.mjs
+ ├── LICENSE
+ ├── next-env.d.ts
+ ├── next.config.ts
+ ├── package-lock.json
+ ├── package.json
+ ├── postcss.config.mjs
+ ├── README.md
+ ├── README.md.bak
+ └── tsconfig.json
+```
+
+## 📦 Installation & Setup
+
+To run this project locally, follow these steps:
 
 1. **Clone the repository:**
 
-   ```bash
+   ```sh
    git clone https://github.com/genta-bahana-nagari/useless-facts-club.git
    cd useless-facts-club
    ```
 
-   > The `main` branch is stable and tested.
+2. **Set environment:**
 
-2. **Install dependencies:**
-
-   ```bash
-   npm install
-   ```
-
-3. **Set up your environment variables:**
-   Create a .env file by copying the example:
-
-   ```bash
+   ```sh
    cp .env.example .env
    ```
 
-   Update the following in .env:
+   You will see this configuration and adjust them with your keys and links:
 
-   ```bash
-   DATABASE_URL="your_neon_database_url"
+   ```sh
+    DATABASE_URL="your_postgresql_connection_string_here"
    ```
+3. **Install dependencies:**
+
+   ```sh
+   npm install
+  ```
 
 4. **Push Prisma schema and generate Prisma Client:**
-
-   ```bash
+   ```sh
    npx prisma db push
    ```
 
-5. **Run the local development server:**
 
-   ```bash
+5. **Run the development server:**
+
+   ```sh
    npm run dev
    ```
 
-6. **Run the local Prisma Studio (optional):**
-   ```bash
-   npx prisma studio
-   ```
+6. Open http://localhost:3000 in your browser.
 
 ---
 
-## 🌐 Deployment
+## 🚀 Deployment
 
-This project is optimized for any kind of deployment:
+To deploy the project, use one of these services:
 
-### Vercel
-- Push to GitHub
-- Import into Vercel
-- Add your environment variable DATABASE_URL
-- Deploy and enjoy!
-
-### Docker (VPS Hosting recomended)
-- Push to GitHub
-- Import into your VPS hosting
-- Add your environment variable DATABASE_URL
-- Deploy with docker-compose command and enjoy!
-> Dockerfile and docker-compose.yml is provided for example
+- **Vercel:** `vercel --prod`, or you can connect your repo and deploy.
+- **Docker:** config your own Dockerfile along with other related configurations.
 
 ### Docker on VPS Tips
 
 #### Database Bug
 After you run the compose (specially detached mode) and the database is not attached, I get you some tips:
-```bash
+```sh
 sudo docker exec -it web_container_name sh
 ```
 > Check your web container name in docker compose, or run this:
-```bash
+```sh
 docker ps
 ```
 Inside container
-```bash
+```sh
 npx prisma generate
 npx prisma migrate deploy
 ```
@@ -114,7 +172,7 @@ These will connect your web app to your database hosting (if you use online data
 
 If you running this along with other projects (or services that using the same port), you can edit the traefik config in docker-compose.yml to avoid conflicts:
 
-```bash
+```sh
   traefik: #for proxy
     image: traefik:v2.11
     container_name: traefik
@@ -136,7 +194,7 @@ If you running this along with other projects (or services that using the same p
       - "./traefik:/letsencrypt"
 ```
 Then you can use <strong>reverse proxy</strong> and <strong>cerbot SSL</strong> to make it secure and reliable. Nginx example:
-```bash
+```sh
 server {
     listen 443 ssl;
     server_name your_domain.com;
@@ -171,10 +229,9 @@ server {
 
 ---
 
-## 🤝 Contributing
+## 👤 Author
 
-Contributions are always welcome!  
-You can fork the repo and open a pull request — or clone and build locally first to test your changes.
+- **Genta Bahana Nagari** – [LinkedIn](https://www.linkedin.com/in/genta-bahana-nagari/) | [GitHub](https://github.com/genta-bahana-nagari)
 
 ---
 
